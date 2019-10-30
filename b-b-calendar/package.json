@@ -5,35 +5,27 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "apollo": "vue-cli-service apollo:dev --generate-schema",
-    "apollo:schema:generate": "vue-cli-service apollo:schema:generate",
-    "apollo:schema:publish": "vue-cli-service apollo:schema:publish",
-    "apollo:start": "vue-cli-service apollo:start"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.3.2",
-    "graphql-type-json": "^0.2.1",
     "vue": "^2.6.10",
-    "vue-apollo": "^3.0.0-beta.11",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-plugin-typescript": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "eslint": "^5.16.0",
-    "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
-    "graphql-tag": "^2.9.0",
+    "lint-staged": "^9.4.2",
     "prettier": "^1.18.2",
     "typescript": "~3.5.3",
-    "vue-cli-plugin-apollo": "^0.21.3",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -46,22 +38,10 @@
       "@vue/prettier",
       "@vue/typescript"
     ],
-    "rules": {
-      "graphql/template-strings": [
-        "error",
-        {
-          "env": "literal",
-          "projectName": "app",
-          "schemaJsonFilepath": "node_modules/.temp/graphql/schema.json"
-        }
-      ]
-    },
+    "rules": {},
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
-    },
-    "plugins": [
-      "graphql"
-    ]
+    }
   },
   "postcss": {
     "plugins": {
@@ -71,5 +51,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue,ts}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
 }
